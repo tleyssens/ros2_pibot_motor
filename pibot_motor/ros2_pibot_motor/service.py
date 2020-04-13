@@ -25,22 +25,27 @@ def triggerMotor(request, response):
     global g_node
 
     g_node.get_logger().info('Trigger Motor!')
-
+     # enable motors
+    GPIO.output(11, 1)
+    GPIO.output(22, 1)
+    
     # Turn the right motor forwards
-    GPIO.output(9, 0)
-    GPIO.output(10, 1)
+    GPIO.output(27, 0)
+    GPIO.output(17, 1)
 
     # Turn the left motor forwards
-    GPIO.output(7, 0)
-    GPIO.output(8, 1)
+    GPIO.output(10, 0)
+    GPIO.output(9, 1)
     # Wait for 1 seconds
     time.sleep(1)
 
     # Turn all motors off
-    GPIO.output(7, 0)
-    GPIO.output(8, 0)
-    GPIO.output(9, 0)
+    GPIO.output(11, 0)
     GPIO.output(10, 0)
+    GPIO.output(9, 0)
+    GPIO.output(22, 0)
+    GPIO.output(27, 0)
+    GPIO.output(17, 0)
 
     response.success = True
     response.message = "Sucess!"
@@ -56,15 +61,20 @@ def main(args=None):
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
     # Set the GPIO Pin mode
-    GPIO.setup(7, GPIO.OUT)
-    GPIO.setup(8, GPIO.OUT)
-    GPIO.setup(9, GPIO.OUT)
+    GPIO.setup(11, GPIO.OUT)
     GPIO.setup(10, GPIO.OUT)
+    GPIO.setup(9, GPIO.OUT)
+    GPIO.setup(22, GPIO.OUT)
+    GPIO.setup(27, GPIO.OUT)
+    GPIO.setup(17, GPIO.OUT)
+    
     # Turn all motors off
-    GPIO.output(7, 0)
-    GPIO.output(8, 0)
-    GPIO.output(9, 0)
+    GPIO.output(11, 0)
     GPIO.output(10, 0)
+    GPIO.output(9, 0)
+    GPIO.output(22, 0)
+    GPIO.output(27, 0)
+    GPIO.output(17, 0)
 
     g_node = rclpy.create_node('motor')
 
